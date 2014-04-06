@@ -1,17 +1,21 @@
-.PHONY: pdf ps dvi  view clean
+.PHONY: pdf ps dvi view clean
+
+LATEXMK = latexmk
 
 pdf:
-	./latexmk -pdf
+	$(LATEXMK) -pdf
 
 ps:
-	./latexmk -ps
+	$(LATEXMK) -ps
 
 dvi:
-	./latexmk -dvi
+	$(LATEXMK) -dvi
 
 view:
-	./latexmk -pdf -pv
+	$(LATEXMK) -pdf -pv
 
 clean:
-	./latexmk -C
+	$(LATEXMK) -C
+
+
 
