@@ -1,6 +1,6 @@
 .PHONY: pdf ps dvi view clean
 
-LATEXMK = latexmk
+LATEXMK = ./latexmk
 
 pdf:
 	$(LATEXMK) -pdf
