@@ -72,7 +72,7 @@ sub gp2eps {
 			}
 		}
 	}
-	return system("gnuplot -e \"cd '" . dirname("$_[0].gp") . "'\" -e \"set output \\\"gnuplot.eps\\\"\" -e \"set terminal postscript enhanced color\" " . basename("$_[0].gp"));
+	return system("gnuplot -e \"cd '" . dirname("$_[0].gp") . "'\" -e \"set output \\\"gnuplot.eps\\\"\" -e \"set terminal postscript enhanced color eps\" " . basename("$_[0].gp"));
 }
 
 add_cus_dep('cir', 'eps', 0, 'cir2eps');
