@@ -2,7 +2,16 @@
 \usepackage{graphicx}
 \usepackage[update,prepend]{epstopdf}
 \usepackage{floatrow}
+\usepackage{glossaries}
+\newglossaryentry{A}
+{
+  name=A,
+  description={First letter}
+}
+\makeglossaries
+
 \begin{document}
+\glsaddall
 \begin{figure}
 \includegraphics[width=1cm]{graphics/gif.eps}
 \caption{GIF image}
@@ -39,4 +48,6 @@
 \includegraphics[width=5cm]{graphics/gnuplot.eps}
 \caption{Gnuplot image}
 \end{figure}
+\clearpage
+\printglossaries
 \end{document}
