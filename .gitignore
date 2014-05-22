@@ -7,3 +7,7 @@
 *.log
 *.dvi
 *.ps
+
+#synctex files
+*.synctex
+*.synctex.gz
