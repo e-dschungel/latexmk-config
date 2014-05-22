@@ -11,8 +11,11 @@ $recorder = 1;
 
 use File::Basename;
 
-$pdflatex = 'pdflatex --shell-escape -interaction=batchmode %O %S';
-$latex = 'latex --shell-escape -interaction=batchmode %O %S';
+$pdflatex = 'pdflatex --shell-escape -interaction=batchmode -synctex=1 %O %S';
+$latex = 'latex --shell-escape -interaction=batchmode -synctex=1 %O %S';
+
+#add synctex extensions so they are cleaned
+push @generated_exts, 'synctex', 'synctex.gz';
 
 # detects an outdated pdf-image, and triggers a pdflatex-run
 add_cus_dep( 'eps', 'pdf', 0, 'cus_dep_require_primary_run' );

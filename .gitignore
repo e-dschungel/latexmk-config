@@ -7,7 +7,14 @@
 *.log
 *.dvi
 *.ps
+
+#glossary files
 *.gls
 *.glg
 *.glo
 *.ist
+
+#synctex files
+*.synctex
+*.synctex.gz
+

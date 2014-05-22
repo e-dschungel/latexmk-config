@@ -4,6 +4,7 @@ latexmk-config
 This is a configuration for latexmk, a  tool to build latex documents.
 It contains custom dependencies for automatic conversion of many types of graphics, so you only have to add the graphic sources to your document. The conversion to eps (for latex) or pdf (for pdflatex) it done automatically.
 Furthermore a handy wrapper makefile is provided to start latexmk.
+(pdf)latex is called with the synctex option, so backward (or inverse) search will work.
 
 ##Custom dependencies
 These are the files that can be converted automatically at the moment. The required tools are given.
