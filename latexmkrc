@@ -48,6 +48,11 @@ sub asy2eps {
 	return system("asy -f eps -o \"$_[0].eps\" \"$_[0].asy\"");
 }
 
+add_cus_dep('asy', 'pdf', 0, 'asy2pdf');
+sub asy2pdf {
+	return system("asy -f pdf -o \"$_[0].pdf\" \"$_[0].asy\"");
+}
+
 add_cus_dep('dia', 'eps', 0, 'dia2eps');
 sub dia2eps {
 	return system("dia -t eps -e \"$_[0].eps\" \"$_[0].dia\"");
