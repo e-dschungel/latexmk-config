@@ -1,6 +1,8 @@
-.PHONY: pdf ps dvi view clean
+.PHONY: pdf ps dvi view clean test
 
 LATEXMK = ./latexmk
+PDFVIEWER = evince
+DVIVIEWER = evince
 
 pdf:
 	$(LATEXMK) -pdf
@@ -16,6 +18,17 @@ view:
 
 clean:
 	$(LATEXMK) -C
+
+test:
+	$(LATEXMK) -C
+	$(LATEXMK) -pdf
+	$(PDFVIEWER) test.pdf
+	$(LATEXMK) -C
+	$(LATEXMK)
+	$(DVIVIEWER) test.dvi
+	$(LATEXMK) -C
+	@echo "Files after cleaning:"
+	git status graphics --ignored --short
 
 
 
