@@ -3,6 +3,7 @@
 \usepackage[update,prepend]{epstopdf}
 \usepackage{floatrow}
 \usepackage{glossaries}
+\usepackage{ifpdf}
 \newglossaryentry{A}
 {
   name=A,
@@ -36,6 +37,16 @@
 \includegraphics[width=5cm]{graphics/asy.eps}
 \caption{Asymtote image}
 \end{figure}
+%
+\begin{figure}
+\ifpdf
+	\includegraphics[width=5cm]{graphics/asy_pdf.pdf}
+	\caption{Asymtote image directly converted to PDF}
+\else
+	\caption{WARNING! Cannot test Asymtote to PDF as latex was used to compile!}
+\fi
+\end{figure}
+%
 \begin{figure}
 \includegraphics{graphics/dia.eps}
 \caption{graphics/dia.eps}
