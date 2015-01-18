@@ -10,7 +10,7 @@ Furthermore a handy wrapper makefile is provided to start latexmk.
 These are the files that can be converted automatically at the moment. The required tools are given.
 
 ### Adobe Illustrator (*.ai)
-Requirements: pdf2ps
+Requirements: pdftops and ps2eps
 
 ### Asymtote (*.asy)
 Requirements: asymtote
