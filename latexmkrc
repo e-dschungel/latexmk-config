@@ -80,7 +80,17 @@ sub png2eps {
 
 add_cus_dep('svg', 'eps', 0, 'svg2eps');
 sub svg2eps {
-	return system("inkscape --export-text-to-path --export-eps=\"$_[0].eps\" \"$_[0].svg\"");
+	return system("inkscape --export-area-drawing --export-text-to-path --export-eps=\"$_[0].eps\" \"$_[0].svg\"");
+}
+
+add_cus_dep('svg', 'pdf_tex', 0, 'svg2pdf_tex');
+sub svg2pdf_tex {
+        return system("inkscape --export-area-drawing --export-latex --export-pdf=\"$_[0].pdf\" \"$_[0].svg\"");
+}
+
+add_cus_dep('svg', 'tex', 0, 'svg2tex');
+sub svg2tex {
+        return system("inkscape --export-area-drawing --export-latex --export-eps=\"$_[0].eps\" \"$_[0].svg\"");
 }
 
 add_cus_dep('gp', 'eps', 0, 'gp2eps');
