@@ -11,3 +11,9 @@
 #synctex files
 *.synctex
 *.synctex.gz
+
+#temporary files in custom dependencies
+*.pdf_tex
+*.eps_tex
+
+
