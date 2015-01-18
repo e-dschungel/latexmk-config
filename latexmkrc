@@ -88,8 +88,8 @@ sub svg2pdf_tex {
         return system("inkscape --export-area-drawing --export-latex --export-pdf=\"$_[0].pdf\" \"$_[0].svg\"");
 }
 
-add_cus_dep('svg', 'tex', 0, 'svg2tex');
-sub svg2tex {
+add_cus_dep('svg', 'eps_tex', 0, 'svg2eps_tex');
+sub svg2eps_tex {
         return system("inkscape --export-area-drawing --export-latex --export-eps=\"$_[0].eps\" \"$_[0].svg\"");
 }
 
