@@ -4,6 +4,10 @@
 \usepackage{floatrow}
 \usepackage{glossaries}
 \usepackage{ifpdf}
+
+%set path with figures to include inkscape latex+eps/pdf images from graphics dir
+\graphicspath{{graphics/}{../graphics/}}
+
 \newglossaryentry{A}
 {
   name=A,
@@ -29,6 +33,17 @@
 \includegraphics[width=1cm]{graphics/svg.eps}
 \caption{SVG image}
 \end{figure}
+%
+\begin{figure}
+\ifpdf
+	\input{graphics/svg_tex.pdf_tex}
+	\caption{SVG image (with combined Latex+PDF output)}
+\else
+	\input{graphics/svg_tex.eps_tex}	
+	\caption{SVG image (with combined Latex+EPS output)}
+\fi
+\end{figure}
+%
 \begin{figure}
 \includegraphics{graphics/ai.eps}
 \caption{graphics/ai.eps}
