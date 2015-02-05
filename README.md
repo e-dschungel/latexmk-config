@@ -18,9 +18,9 @@ Requirements: asymtote
 ### Bitmaps (*.jpg, *.png, *.gif)
 Requirements: convert (part of imagemagick)
 
-### Cirkuit
-*Warning*: Not yet working
-Requirements: cirkuit and dpic
+### Circuit Macros (*.cir)
+Requirements: m4, dpic and epstool
+circuits macros are assumed to be installed in ${HOME}/.kde/share/apps/cirkuit/circuit_macros which is the case if you use cirKuit, but the location can be configured in the latexmkrc file
 
 ### Dia (*.dia)
 Requirements: dia
