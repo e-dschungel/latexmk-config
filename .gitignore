@@ -9,9 +9,15 @@
 *.ps
 
 #glossary files
+<<<<<<< HEAD
 *.gls
 *.glg
 *.glo
+=======
+*.glo
+*.glg
+*.gls
+>>>>>>> master
 *.ist
 
 #synctex files
