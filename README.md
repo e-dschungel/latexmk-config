@@ -22,6 +22,7 @@ Requirements: pdftops and ps2eps
 
 ### Asymtote (*.asy)
 Requirements: asymtote
+
 After the eps->pdf conversion for pdflatex the bounding box may be too large. This can be avoided by using the direct asy->pdf conversion.
 
 ### Bitmaps (*.jpg, *.png, *.gif)
@@ -29,6 +30,7 @@ Requirements: convert (part of imagemagick)
 
 ### Circuit Macros (*.cir)
 Requirements: m4, dpic and epstool
+
 circuits macros are assumed to be installed in ${HOME}/.kde/share/apps/cirkuit/circuit_macros which is the case if you use cirKuit, but the location can be configured in the latexmkrc file
 
 ### Dia (*.dia)
@@ -38,18 +40,22 @@ Requirements: dia
 Requirements: makeglossaries (part of LaTeX package glossaries)
 
 ###Gnuplot (*.gp)
+Requirements: gnuplot
+
 Conversion to eps using the postscript terminal. The terminal and the output filename are set automatically, so you don't need to set it in your *.gp file. Dependencies from external data files are handled if they are named *.dat or *.csv.
 Requirements: gnuplot
 
 
 ### SVG (*.svg)
 Requirements: inkscape
+
 For svg file there are three conversion rules:
+
 | Rule | Howto use | Remarks |
 --- | --- | ---
-svg->eps | \includegraphics{graphics/svg.eps} | Use inkscape fonts
-svg->eps_tex | \input{graphics/svg.eps_tex} | EPS+LaTex for typesetting, this may have the wrong bounding box, see [Bugreport #380501](https://bugs.launchpad.net/inkscape/+bug/380501)
-svg->pdf_tex | \input{graphics/svg.pdf_tex} | PDF+LaTex for typesetting
+| svg->eps | \includegraphics{graphics/svg.eps} | Uses inkscape fonts
+| svg->eps_tex | \input{graphics/svg.eps_tex} | EPS+LaTex for typesetting, this may have the wrong bounding box, see [Bugreport #380501](https://bugs.launchpad.net/inkscape/+bug/380501) |
+| svg->pdf_tex | \input{graphics/svg.pdf_tex} | PDF+LaTex for typesetting |
 
 ### XFig (*.fig)
 Requirements: fig2dev
