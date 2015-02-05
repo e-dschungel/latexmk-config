@@ -8,6 +8,12 @@
 *.dvi
 *.ps
 
+#glossary files
+*.glo
+*.glg
+*.gls
+*.ist
+
 #synctex files
 *.synctex
 *.synctex.gz
