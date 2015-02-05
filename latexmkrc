@@ -10,6 +10,16 @@ $pdf_previewer = "evince";
 #use recorder feature to list input files
 $recorder = 1;
 
+#config for circuit macros
+#path to circuit macros
+$circuit_macros_path = "${HOME}/.kde/share/apps/cirkuit/circuit_macros";
+#path to dpic binary
+$dpic_path = "";
+#additional commands used when compiling circuit macros
+$cm_addon_commands = ''; #\\commandA\n\\commandB  # e.g. \\renewcommand{\\familydefault}{\\sfdefault}
+#additional packages used when compiling circuit macros
+$cm_addon_packages = ''; #,package1,package2  #e.g. ,sfmath
+
 use File::Basename;
 
 $pdflatex = 'pdflatex --shell-escape -interaction=batchmode -synctex=1 %O %S';
@@ -114,13 +124,40 @@ sub gp2eps {
 add_cus_dep('cir', 'eps', 0, 'cir2eps');
 
 sub cir2eps {
+    	#get dpic output
+	my $dpicoutput = `bash -c \"m4 -I $circuit_macros_path pstricks.m4 libcct.m4 \"$_[0].cir\" | ${dpic_path}dpic -p\"`;
+    	#construct texfile
+	my $texfile = <<"END";
+	\\documentclass{article}
+	\\usepackage{pstricks,pst-eps,boxdims,graphicx,pst-grad,amsmath$cm_addon_packages}
+	\\pagestyle{empty}
+	\\thispagestyle{empty}
+	$cm_addon_commands
+	\\begin{document}
+	\\newbox
+	\\graph
+	\\begin{TeXtoEPS}
+	$dpicoutput
+	\\box
+	\\graph
+	\\end{TeXtoEPS}
+	\\end{document}
+END
+#END mustn't be indented
+	#strip leading spaces used just for indentation here in code
+	$texfile =~ s/^\s+//gm;
 	open(my $fh, '>', "$_[0].tex"); 
-	print $fh "\\\\\\documentclass{article}\n\\usepackage{pstricks,pst-eps,boxdims,graphicx,pst-grad,amsmath$(CM_ADDON_PACKAGES)}\n\\pagestyle{empty}\n\\\thispagestyle{empty}\n$(CM_ADDON_COMMANDS)\n\\\\begin{document}\n\\\newbox\\graph\n\\\begin{TeXtoEPS}\n";
-	system ("m4 -I $(CIRCUIT_MACROS_PATH) pstricks.m4 libcct.m4 \"$_[0].cir\" | $(DPIC_PATH)dpic -p > \"$_[0].tex\"");
-	print $fh "\n\\\\\\box\n\\\\\\graph\n\\\\\\end{TeXtoEPS}\n\\\\\\end{document}\n";
+	print $fh $texfile;	
 	close $fh; 
-	system("TEXINPUTS=\"$(CIRCUIT_MACROS_PATH):$$TEXINPUTS:\" latex \"$_[0].tex\" && rm -f \"$_[0].aux\" \"$_[0].log\" \"$_[0].tex\"");
-	system("dvips -Ppdf -G0 -E $_[0].dvi -o $_[0].eps && rm -f $_[0].dvi"); 
+	#compile tex to dvi
+	print dirname($_[0]);
+	system("TEXINPUTS=\"${circuit_macros_path}:\$TEXINPUTS:\" latex -output-directory=" . dirname($_[0]) . " \"$_[0].tex\" > /dev/null");
+	#convert dvi to eps
+	system("dvips -Ppdf -G0 -E $_[0].dvi -o temp.eps > /dev/null");
+	#fix bounding box with epstool
+	system("epstool --copy --bbox temp.eps \"$_[0].eps\" > /dev/null");
+	#delete temporary files
+	system("rm -f \"$_[0].dvi\" \"$_[0].log\" \"$_[0].aux\" \"$_[0].tex\" temp.eps"); 
 }
 
 # To allow more general pattern in $clean_ext instead of just an
