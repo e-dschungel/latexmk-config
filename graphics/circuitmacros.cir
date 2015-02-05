@@ -1,0 +1,4 @@
+.PS
+cct_init
+resistor(,E,); llabel(,R_1,)
+.PE
