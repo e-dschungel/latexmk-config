@@ -8,10 +8,11 @@ Furthermore a handy wrapper makefile is provided to start latexmk.
 
 An example how to use this latexmkrc file can be found in the testing branch.
 
-##Assumptions##
-- In general EPS output was prefered when this script was built, as it can be used with both latex and pdflatex (using the automatic eps->pdf conversion of newer versions). However, the PDF output of most programs seems to be in a better shape. Bugs you may encouter are given below.
+##General Remarks##
+- In general EPS output was prefered when this script was built, as it can be used with both latex and pdflatex (using the automatic eps->pdf conversion of newer pdflatex versions). However, the PDF output of most programs seems to be in a better shape. Bugs you may encouter with the EPS output are given below.
 - All graphics are assumed to live in the subdir 'graphics'. This is required to clean all generated files. The path can be changed in the latexmkrc file.
 - In the includegraphics statement a file extension must be used. ".eps" is prefered here, but for pdflatex ".pdf" can be used, too. 
+- The 'graphics' must be given in the includegraphics statement, defining a \graphicspath is not sufficient. 
 
 
 ##Custom dependencies
@@ -53,8 +54,10 @@ For svg file there are three conversion rules:
 | Rule | Howto use | Remarks |
 --- | --- | ---
 | svg->eps | \includegraphics{graphics/svg.eps} | Uses inkscape fonts
-| svg->eps_tex | \input{graphics/svg.eps_tex} | EPS+LaTex for typesetting, this may have the wrong bounding box, see [Bugreport #380501](https://bugs.launchpad.net/inkscape/+bug/380501) |
-| svg->pdf_tex | \input{graphics/svg.pdf_tex} | PDF+LaTex for typesetting |
+| svg->eps_tex | \input{graphics/svg.eps_tex} | EPS+LaTeX for typesetting, this may have the wrong bounding box, see [Bugreport #380501](https://bugs.launchpad.net/inkscape/+bug/380501) |
+| svg->pdf_tex | \input{graphics/svg.pdf_tex} | PDF+LaTeX for typesetting |
+
+The last two options require inkscape versions >0.48 and a \graphicspath{{graphics/}} statement (see example in testing branch).
 
 ### XFig (*.fig)
 Requirements: fig2dev
