@@ -56,6 +56,8 @@ For svg file there are three conversion rules:
 | svg->eps_tex | \input{graphics/svg.eps_tex} | EPS+LaTex for typesetting, this may have the wrong bounding box, see [Bugreport #380501](https://bugs.launchpad.net/inkscape/+bug/380501) |
 | svg->pdf_tex | \input{graphics/svg.pdf_tex} | PDF+LaTex for typesetting |
 
+The last two options require inkscape versions >0.48.
+
 ### XFig (*.fig)
 Requirements: fig2dev
 
