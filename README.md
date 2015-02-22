@@ -43,7 +43,7 @@ Requirements: makeglossaries (part of LaTeX package glossaries)
 ###Gnuplot (*.gp)
 Requirements: gnuplot
 
-Conversion to eps using the postscript terminal. The terminal and the output filename are set automatically, so you don't need to set it in your *.gp file. Dependencies from external data files are handled if they are named *.dat or *.csv.
+Conversion to eps using the cairoeps terminal. The terminal and the output filename are set automatically, so you don't need to set it in your *.gp file. Dependencies from external data files are handled if they are named *.dat or *.csv. A \graphicspath{{graphics/}} statement (see example in testing branch) is required.
 
 
 ### SVG (*.svg)
