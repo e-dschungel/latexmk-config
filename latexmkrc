@@ -20,6 +20,11 @@ $cm_addon_commands = ''; #\\commandA\n\\commandB  # e.g. \\renewcommand{\\family
 #additional packages used when compiling circuit macros
 $cm_addon_packages = ''; #,package1,package2  #e.g. ,sfmath
 
+#config for gnuplot
+# figure sizes in x and y, must be given with units "cm" or "in"
+$gnuplot_size_x = "9cm";
+$gnuplot_size_y = "6cm";
+
 use File::Basename;
 
 $pdflatex = 'pdflatex --shell-escape -interaction=batchmode -synctex=1 %O %S';
@@ -104,8 +109,8 @@ sub svg2eps_tex {
         return system("inkscape --export-area-drawing --export-latex --export-eps=\"$_[0].eps\" \"$_[0].svg\"");
 }
 
-add_cus_dep('gp', 'eps', 0, 'gp2eps');
-sub gp2eps {
+add_cus_dep('gp', 'tex', 0, 'gp2tex');
+sub gp2tex {
 	#scan for these extensions as dependencies for gnuplot
 	my @extensions = ("dat", "csv");
 	$extensionRegExp =  "(?:" . (join "|", map quotemeta, @extensions) . ")";
@@ -118,7 +123,7 @@ sub gp2eps {
 			}
 		}
 	}
-	return system("gnuplot -e \"cd '" . dirname("$_[0].gp") . "'\" -e \"set output \\\"gnuplot.eps\\\"\" -e \"set terminal postscript enhanced color eps\" " . basename("$_[0].gp"));
+	return system("gnuplot -e \"cd '" . dirname("$_[0].gp") . "'\" -e \"set terminal cairolatex eps size ${gnuplot_size_x},$gnuplot_size_y\" -e \"set output '" . basename("$_[0]") . ".tex'\" " . basename("$_[0].gp"));
 }
 
 add_cus_dep('cir', 'eps', 0, 'cir2eps');
