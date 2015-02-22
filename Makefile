@@ -1,6 +1,6 @@
 .PHONY: pdf ps dvi view clean test
 
-LATEXMK = ./latexmk
+LATEXMK = latexmk
 PDFVIEWER = evince
 DVIVIEWER = evince
 
