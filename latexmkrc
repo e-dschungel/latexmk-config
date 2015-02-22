@@ -124,6 +124,7 @@ sub gp2tex {
 		}
 	}
 	return system("gnuplot -e \"cd '" . dirname("$_[0].gp") . "'\" -e \"set terminal cairolatex eps size ${gnuplot_size_x},$gnuplot_size_y\" -e \"set output '" . basename("$_[0]") . ".tex'\" " . basename("$_[0].gp"));
+	rename "$_[0].tex","$_[0].eps_tex";
 }
 
 add_cus_dep('cir', 'eps', 0, 'cir2eps');
