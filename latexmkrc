@@ -109,8 +109,8 @@ sub svg2eps_tex {
         return system("inkscape --export-area-drawing --export-latex --export-eps=\"$_[0].eps\" \"$_[0].svg\"");
 }
 
-add_cus_dep('gp', 'tex', 0, 'gp2tex');
-sub gp2tex {
+add_cus_dep('gp', 'eps_tex', 0, 'gp2eps_tex');
+sub gp2eps_tex {
 	#scan for these extensions as dependencies for gnuplot
 	my @extensions = ("dat", "csv");
 	$extensionRegExp =  "(?:" . (join "|", map quotemeta, @extensions) . ")";
@@ -123,8 +123,8 @@ sub gp2tex {
 			}
 		}
 	}
-	return system("gnuplot -e \"cd '" . dirname("$_[0].gp") . "'\" -e \"set terminal cairolatex eps size ${gnuplot_size_x},$gnuplot_size_y\" -e \"set output '" . basename("$_[0]") . ".tex'\" " . basename("$_[0].gp"));
-	rename "$_[0].tex","$_[0].eps_tex";
+	system("gnuplot -e \"cd '" . dirname("$_[0].gp") . "'\" -e \"set terminal cairolatex eps size ${gnuplot_size_x},$gnuplot_size_y\" -e \"set output '" . basename("$_[0]") . ".tex'\" " . basename("$_[0].gp")) and die "Gnuplot call failed";
+	return !rename "$_[0].tex","$_[0].eps_tex";
 }
 
 add_cus_dep('cir', 'eps', 0, 'cir2eps');
