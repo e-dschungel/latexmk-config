@@ -166,6 +166,35 @@ END
 	system("rm -f \"$_[0].dvi\" \"$_[0].log\" \"$_[0].aux\" \"$_[0].tex\" temp.eps"); 
 }
 
+add_cus_dep('cir', 'pdf', 0, 'cir2pdf');
+sub cir2pdf {
+    	#get dpic output
+	my $dpicoutput = `bash -c \"m4 -I $circuit_macros_path libcct.m4 pgf.m4 \"$_[0].cir\" | ${dpic_path}dpic -g\"`;
+    	#construct texfile
+	my $texfile = <<"END";
+	\\documentclass{standalone}
+	\\usepackage{tikz,boxdims,graphicx,amsmath$cm_addon_packages}
+	\\usepackage[utf8]{inputenc}
+	\\usepackage[T1]{fontenc}
+	\\usepackage{lmodern}
+	$cm_addon_commands
+	\\begin{document}
+	$dpicoutput
+	\\end{document}
+END
+#END mustn't be indented
+	#strip leading spaces used just for indentation here in code
+	$texfile =~ s/^\s+//gm;
+	open(my $fh, '>', "$_[0].tex"); 
+	print $fh $texfile;	
+	close $fh; 
+	#compile tex to directly to pdf
+	print dirname($_[0]);
+	system("TEXINPUTS=\"${circuit_macros_path}:\$TEXINPUTS:\" pdflatex -output-directory=" . dirname($_[0]) . " \"$_[0].tex\" > /dev/null");
+	#delete temporary files
+	system("rm -f \"$_[0].log\" \"$_[0].aux\" \"$_[0].tex\""); 
+}
+
 # To allow more general pattern in $clean_ext instead of just an
 # extension or something containing %R.
 # This is done by overriding latexmk's cleanup1 subroutine.
