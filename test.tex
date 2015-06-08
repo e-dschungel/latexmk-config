@@ -76,8 +76,18 @@
 \end{figure}
 \begin{figure}
 \includegraphics{graphics/circuitmacros.eps}
-\caption{Circuit Macros image}
+\caption{Circuit\_macros image}
 \end{figure}
+\begin{figure}
+\ifpdf
+	\includegraphics{graphics/circuitmacros.pdf}
+	\caption{Circuit\_macros image directly converted to PDF}
+\else
+	\caption{WARNING! Cannot test Circuit\_macros to PDF conversion as latex was used to compile!}
+\fi
+\end{figure}
+
+
 \clearpage
 \printglossaries
 \end{document}
