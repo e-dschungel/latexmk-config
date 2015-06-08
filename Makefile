@@ -28,7 +28,7 @@ test:
 	$(DVIVIEWER) test.dvi
 	$(LATEXMK) -C
 	@echo "Files after cleaning:"
-	git status graphics --ignored --short
+	@git status graphics --ignored --short
 
 
 
