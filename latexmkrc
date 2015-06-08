@@ -136,6 +136,9 @@ sub cir2eps {
 	my $texfile = <<"END";
 	\\documentclass{article}
 	\\usepackage{pstricks,pst-eps,boxdims,graphicx,pst-grad,amsmath$cm_addon_packages}
+        \\usepackage[utf8]{inputenc}
+        \\usepackage[T1]{fontenc}
+        \\usepackage{lmodern}
 	\\pagestyle{empty}
 	\\thispagestyle{empty}
 	$cm_addon_commands
