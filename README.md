@@ -8,14 +8,14 @@ Furthermore a handy wrapper makefile is provided to start latexmk.
 
 An example how to use this latexmkrc file can be found in the testing branch.
 
-##General Remarks##
+## General Remarks
 - In general EPS output was prefered when this script was built, as it can be used with both latex and pdflatex (using the automatic eps->pdf conversion of newer pdflatex versions). However, the PDF output of most programs seems to be in a better shape. Bugs you may encouter with the EPS output are given below.
 - All graphics are assumed to live in the subdir 'graphics'. This is required to clean all generated files. The path can be changed in the latexmkrc file. **All eps and pdf files in this directory will be deleted on a `make clean` or `latexmk -c`. Make sure that all files can be regenerated from their source files (or live in a different subdir)**
 - In the includegraphics statement a file extension must be used. ".eps" is prefered here, but for pdflatex ".pdf" can be used, too. 
 - The 'graphics' must be given in the includegraphics statement, defining a \graphicspath is not sufficient. 
 
 
-##Custom dependencies
+## Custom dependencies
 These are the files that can be converted automatically at the moment. The required tools are given.
 
 ### Adobe Illustrator (*.ai)
@@ -45,7 +45,7 @@ Requirements: dia
 ### Glossaries
 Requirements: makeglossaries (part of LaTeX package glossaries)
 
-###Gnuplot (*.gp)
+### Gnuplot (*.gp)
 Requirements: gnuplot
 
 Conversion to eps using the cairoeps terminal. The terminal and the output filename are set automatically, so you don't need to set it in your *.gp file. Dependencies from external data files are handled if they are named *.dat or *.csv. A \graphicspath{{graphics/}} statement (see example in testing branch) is required.
@@ -68,7 +68,7 @@ The last two options require inkscape versions >0.48 and a \graphicspath{{graphi
 Requirements: fig2dev
 
 
-##Makefile Targets
+## Makefile Targets
 Target | Action|
 ------ | -------
 make pdf | Build documents as pdf, all dependencies are generated, eps files are converted to pdf by newer pdflatex versions|
